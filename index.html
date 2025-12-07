@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BrandStyle UI Kit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        /* --- Style: Default --- */
+        --font-sans: 'Inter', sans-serif;
+        --color-brand-primary-rgb: 79 70 229; /* Indigo 600 */
+        --color-brand-primary-hover-rgb: 67 56 202; /* Indigo 700 */
+        --color-brand-secondary-rgb: 236 72 153; /* Pink 500 */
+        --color-brand-secondary-hover-rgb: 219 39 119; /* Pink 600 */
+        
+        /* --- Theme: Light --- */
+        --color-brand-background-rgb: 249 250 251; /* Gray 50 */
+        --color-brand-surface-rgb: 255 255 255; /* White */
+        --color-brand-surface-accent-rgb: 229 231 235; /* Gray 200 */
+        --color-brand-text-primary-rgb: 31 41 55; /* Gray 800 */
+        --color-brand-text-secondary-rgb: 107 114 128; /* Gray 500 */
+      }
+      
+      html.dark {
+        /* --- Theme: Dark --- */
+        --color-brand-background-rgb: 17 24 39; /* Gray 900 */
+        --color-brand-surface-rgb: 31 41 55; /* Gray 800 */
+        --color-brand-surface-accent-rgb: 55 65 81; /* Gray 700 */
+        --color-brand-text-primary-rgb: 249 250 251; /* Gray 50 */
+        --color-brand-text-secondary-rgb: 209 213 219; /* Gray 300 */
+      }
+      
+      html[data-style="corporate"] {
+        /* --- Style: Corporate --- */
+        --font-sans: 'Lora', serif;
+        --color-brand-primary-rgb: 59 130 246; /* blue-500 */
+        --color-brand-primary-hover-rgb: 37 99 235; /* blue-600 */
+        --color-brand-secondary-rgb: 107 114 128; /* gray-500 */
+        --color-brand-secondary-hover-rgb: 75 85 99; /* gray-600 */
+      }
+
+      html[data-style="playful"] {
+        /* --- Style: Playful --- */
+        --font-sans: 'Montserrat', sans-serif;
+        --color-brand-primary-rgb: 20 184 166; /* teal-500 */
+        --color-brand-primary-hover-rgb: 13 148 136; /* teal-600 */
+        --color-brand-secondary-rgb: 249 115 22; /* orange-500 */
+        --color-brand-secondary-hover-rgb: 234 88 12; /* orange-600 */
+      }
+    </style>
+    <script>
+      // Prevents theme flashing
+      (function() {
+        const theme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (theme === 'dark' || (!theme && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+        const style = localStorage.getItem('style');
+        if (style) {
+            document.documentElement.setAttribute('data-style', style);
+        }
+      })();
+
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                primary: 'rgb(var(--color-brand-primary-rgb) / <alpha-value>)',
+                'primary-hover': 'rgb(var(--color-brand-primary-hover-rgb) / <alpha-value>)',
+                secondary: 'rgb(var(--color-brand-secondary-rgb) / <alpha-value>)',
+                'secondary-hover': 'rgb(var(--color-brand-secondary-hover-rgb) / <alpha-value>)',
+                background: 'rgb(var(--color-brand-background-rgb) / <alpha-value>)',
+                surface: 'rgb(var(--color-brand-surface-rgb) / <alpha-value>)',
+                'surface-accent': 'rgb(var(--color-brand-surface-accent-rgb) / <alpha-value>)',
+                'text-primary': 'rgb(var(--color-brand-text-primary-rgb) / <alpha-value>)',
+                'text-secondary': 'rgb(var(--color-brand-text-secondary-rgb) / <alpha-value>)',
+              },
+            },
+            fontFamily: {
+              sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui'],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Lora:wght@400;600;700&family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
